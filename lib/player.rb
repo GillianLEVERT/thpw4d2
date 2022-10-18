@@ -3,13 +3,13 @@ class Player
     attr_accessor :name, :life_points #name = string, lifeP = integer
     @@all_players = []
 
-    def initialize(name_to_save)
+    def initialize(name_to_save) #Sauvegarde du nom, indications sur les PV
         @name = name_to_save
         @life_points = 10
         @@all_players << self
     end
 
-    def show_state
+    def show_state #on affiche le status des joueurs
         if @life_points > 0
         puts "#{@name} a #{@life_points} point de life !"
         else
@@ -17,23 +17,25 @@ class Player
         end
     end
 
-    def gets_damages(damages)
+    def gets_damages(damages) #Les dégats, rien de fou
         @life_points = @life_points - damages 
     end
 
-    def attack(player)
+    def compute_damage #rogfdjkfd
+        rand(1..6)
+    end
+
+    def attack(player) #la méthode pour les attacks
         dice = compute_damage
         player.gets_damages(dice)
         puts "#{self.name} inflige #{dice} point de dégat(s) à son adversaire"
         sleep 0.5
     end
 
-    def compute_damage
-        rand(1..6)
-    end
+  
 end
 
-class Human_Player < Player
+class Human_Player < Player #Création d'une nouvelle class
     attr_accessor :weapon_level, :life_points, :name
 
     def initialize(name_to_save)
